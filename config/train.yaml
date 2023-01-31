@@ -1,0 +1,69 @@
+
+# feeder
+feeder: feeders.feeder_animal.Feeder
+train_feeder_args:
+  data_path: E:/FLQold/DEEPLABCUTRELATED/behavior/new3/5_1_1/animal/data_joint_train.npy
+  label_path: E:/FLQold/DEEPLABCUTRELATED/behavior/new3/5_1_1/animal/label_train.pkl
+  debug: False
+  random_choose: False
+  random_shift: False
+  random_move: False
+  window_size: 30
+  normalization: False
+test_feeder_args:
+  data_path: E:/FLQold/DEEPLABCUTRELATED/behavior/new3/5_1_1/animal/data_joint_val.npy
+  label_path: E:/FLQold/DEEPLABCUTRELATED/behavior/new3/5_1_1/animal/label_val.pkl
+
+# model
+model: model.st_tr.Model
+model_args:
+  num_class: 5
+  channel: 3
+  window_size: 30
+  num_person: 1
+  num_point: 18
+  dropout: 0
+  graph: graph.animal
+  graph_args:
+    labeling_mode: 'spatial'
+  mask_learning: True
+  use_data_bn: True
+  attention: True
+  only_attention: False
+  data_normalization: False
+  skip_conn: True
+  weight_matrix: 2
+  bn_flag: True
+  attention_3: False
+  kernel_temporal: 9
+  more_channels: False
+  double_channel: False
+  drop_connect: True
+  concat_original: False
+  all_layers: False
+  adjacency: False
+  agcn: False
+  dv: 0.25
+  dk: 0.25
+  Nh: 8
+  n: 4
+  dim_block1: 10
+  dim_block2: 30
+  dim_block3: 75
+  relative: True
+  visualization: False
+
+  #optical_flow: True
+
+#optim
+weight_decay: 0.000002
+base_lr: 0.01
+lr_decay_rate: 0.1
+step: [30, 50, 70, 90, 120]
+
+# training
+device: [0]
+batch_size: 36
+test_batch_size: 36
+num_epoch: 500
+nesterov: True
